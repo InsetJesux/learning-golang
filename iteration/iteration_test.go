@@ -3,8 +3,21 @@ package iteration
 import "testing"
 
 func TestRepeat(t *testing.T) {
-	repeated := Repeat("a")
-	expected := "aaaaa"
+	t.Run("repeat a 5 times", func(t *testing.T) {
+		repeated := Repeat("a", 0)
+		expected := "aaaaa"
+		assertValue(t, repeated, expected)
+	})
+
+	t.Run("repeat b 10 times", func(t *testing.T) {
+		repeated := Repeat("b", 10)
+		expected := "bbbbbbbbbb"
+		assertValue(t, repeated, expected)
+	})
+}
+
+func assertValue(t testing.TB, repeated, expected string) {
+	t.Helper()
 
 	if repeated != expected {
 		t.Errorf("expected %q but got %q", expected, repeated)
@@ -13,6 +26,6 @@ func TestRepeat(t *testing.T) {
 
 func BenchmarkRepeat(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		Repeat("a")
+		Repeat("a", 0)
 	}
 }
