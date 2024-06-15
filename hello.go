@@ -2,26 +2,38 @@ package main
 
 import "fmt"
 
-const spanish = "Spanish"
-const french = "French"
-const englishHelloPrefix = "Hello, "
-const spanishHelloPrefix = "Hola, "
-const frenchHelloPrefix = "Bonjour, "
+// Se pueden agrupar las constantes en un bloque
+const (
+	spanish = "Spanish"
+	french  = "French"
+
+	englishHelloPrefix = "Hello, "
+	spanishHelloPrefix = "Hola, "
+	frenchHelloPrefix  = "Bonjour, "
+)
 
 func Hello(name string, language string) string {
 	if name == "" {
 		name = "World"
 	}
 
-	if language == spanish {
-		return spanishHelloPrefix + name + "!"
+	return greetingPrefix(language) + name + "!"
+}
+
+// Se crea automáticamente la variable prefix con un valor predeterminado, en el caso de string es ""
+// Si el método empieza con una letra minúscula es privado, si empieza con una letra mayúscula es público
+func greetingPrefix(language string) (prefix string) {
+	switch language {
+	case spanish:
+		prefix = spanishHelloPrefix
+	case french:
+		prefix = frenchHelloPrefix
+	default:
+		prefix = englishHelloPrefix
 	}
 
-	if language == french {
-		return frenchHelloPrefix + name + "!"
-	}
-
-	return englishHelloPrefix + name + "!"
+	// No es obligatorio especificar la variable a retornar, se usa por defecto la variable especificada en la firma del método, en este caso prefix
+	return
 }
 
 func main() {
