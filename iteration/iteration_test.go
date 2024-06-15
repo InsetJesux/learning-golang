@@ -2,6 +2,7 @@ package iteration
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 )
 
@@ -15,6 +16,12 @@ func TestRepeat(t *testing.T) {
 	t.Run("repeat b 10 times", func(t *testing.T) {
 		repeated := Repeat("b", 10)
 		expected := "bbbbbbbbbb"
+		assertValue(t, repeated, expected)
+	})
+
+	t.Run("repeat c 100 times and compare with strings.Repeat", func(t *testing.T) {
+		repeated := Repeat("c", 100)
+		expected := strings.Repeat("c", 100)
 		assertValue(t, repeated, expected)
 	})
 }
